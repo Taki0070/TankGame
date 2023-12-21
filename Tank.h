@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include"Engine/GameObject.h"
 
 class Tank
@@ -6,21 +6,26 @@ class Tank
 {
 private:
 	int hModel_;
+	XMVECTOR front_; // å‰ãƒ™ã‚¯ãƒˆãƒ« zæ–¹å‘ã®å¤§ãã•
+	float speed_; //0.05,0,05*60 m/s
+
+	XMFLOAT3 f;	//ä½•ã‹å…¥ã£ã¦ã‚‹ã¨ã—ã¦
+	XMVECTOR v = XMLoadFloat3(&f);
+	
 public:
 	Tank(GameObject* parent);
 
-	//‰Šú‰»
+
 	void Initialize() override;
 
-	//XV
+	
 	void Update() override;
 
-	//•`‰æ
+	
 	void Draw() override;
 
-	//ŠJ•ú
+
 	void Release() override;
 
 };
-
 

@@ -8,7 +8,7 @@ Ground::Ground(GameObject* parent)
 
 void Ground::Initialize()
 {
-	hModel_ = Model::Load("Model\\Groond2.fbx");
+	hModel_ = Model::Load("Model\\Ground1212.fbx");
 	assert(hModel_ >= 0);
 }
 
