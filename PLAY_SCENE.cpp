@@ -2,6 +2,7 @@
 #include "Engine/Image.h"
 #include "Engine/Model.h"
 #include"Tank.h"
+#include"TankHead.h"
 #include"Ground.h"
 
 
@@ -16,6 +17,7 @@ void PLAY_SCENE::Initialize()
 {
 	Instantiate<Ground>(this);
 	Instantiate<Tank>(this);
+	//Instantiate<TankHead>(this);
 }
 
 void PLAY_SCENE::Update()

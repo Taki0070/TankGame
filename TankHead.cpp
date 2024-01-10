@@ -1,28 +1,34 @@
-#include "Tank.h"
+#include "TankHead.h"
 #include"Engine/Model.h"
 #include"Engine/Input.h"
-#include"Engine/Debug.h"
-#include"Ground.h"
-#include"TankHead.h"
 
-Tank::Tank(GameObject* parent)
-	:GameObject(parent), hModel_(-1)
+TankHead::TankHead(GameObject* parent)
+	:GameObject(parent, "TankHead"), hModel_(-1)
 {
 
 }
 
-void Tank::Initialize()
+TankHead::~TankHead()
 {
-	hModel_ = Model::Load("Model\\tankbody.fbx");
-	assert(hModel_ >= 0);
-	speed_ = 0.05;
-	front_ = XMVECTOR({ 0,0,1,0 }); //移動が変わるy カンマ ,
-	Instantiate<TankHead>(this); //親子関係ができる
 }
 
-void Tank::Update()
+void TankHead::Initialize()
 {
-	
+	hModel_ = Model::Load("Model\\tankhed2.fbx");
+	assert(hModel_>= 0);
+}
+
+void TankHead::Update()
+{
+	if (Input::IsKey(DIK_P))
+	{
+		this->transform_.rotate_.y -= 2;
+	}
+	if (Input::IsKey(DIK_O))
+	{
+		this->transform_.rotate_.y += 2;
+	}
+#if 0
 	if (Input::IsKey(DIK_W))
 	{
 		XMMATRIX rotY = XMMatrixRotationY(XMConvertToRadians(transform_.rotate_.y));
@@ -55,33 +61,18 @@ void Tank::Update()
 	{
 		this->transform_.rotate_.y += 2;
 	}
-	
+#endif
 
-	Ground* pGround = (Ground*)FindObject("Ground");
-//	int hGmodel = pGround->GetModelHandle(); //自分のモデルから地面までの距離が分かる
-
-	RayCastData data;
-	data.start = transform_.position_;
-	data.start.y = 0;
-	data.dir = XMFLOAT3({ 0,-1,0 });
-	//Model::RayCast(hGmodel, &data);// 距離のデータとか、飛んでいく
-
-	if (data.hit == true)
-	{
-		transform_.position_.y = -data.dist;// 0の位置からレイをとばす　（マップは0より下だから
-	}
 
 }
-
-void Tank::Draw()
+void TankHead::Draw()
 {
 	Model::SetTransform(hModel_, transform_);
-	Model::Draw(hModel_);
-
-	
+	Model::Draw(hModel_);//↑セットしたらDrawをかく
 
 }
 
-void Tank::Release()
+void TankHead::Release()
 {
+	
 }
