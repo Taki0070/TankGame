@@ -1,6 +1,7 @@
 #include "TankHead.h"
 #include"Engine/Model.h"
 #include"Engine/Input.h"
+#include"Bullet.h"
 
 TankHead::TankHead(GameObject* parent)
 	:GameObject(parent, "TankHead"), hModel_(-1)
@@ -20,48 +21,33 @@ void TankHead::Initialize()
 
 void TankHead::Update()
 {
-	if (Input::IsKey(DIK_P))
+	if (Input::IsKey(DIK_LEFT))
 	{
 		this->transform_.rotate_.y -= 2;
 	}
-	if (Input::IsKey(DIK_O))
+	if (Input::IsKey(DIK_RIGHT))
 	{
 		this->transform_.rotate_.y += 2;
 	}
-#if 0
-	if (Input::IsKey(DIK_W))
-	{
-		XMMATRIX rotY = XMMatrixRotationY(XMConvertToRadians(transform_.rotate_.y));
-		XMVECTOR rotVec = XMVector3TransformCoord(front_, rotY);
 
-		XMVECTOR move;
-		move = speed_ * rotVec;  //speed_ * front_;
-		XMVECTOR pos = XMLoadFloat3(&(transform_.position_));
-		pos = pos + move;
-		XMStoreFloat3(&(transform_.position_), pos);
-
-	}
-	if (Input::IsKey(DIK_S))
+	if (Input::IsKeyDown(DIK_SPACE))
 	{
-		XMMATRIX rotY = XMMatrixRotationY(XMConvertToRadians(transform_.rotate_.y));
-		XMVECTOR rotVec = XMVector3TransformCoord(front_, rotY);
+		XMFLOAT3 cannonTopPos = Model::GetBonePosition(hModel_,"CannonPos");
+		XMFLOAT3 cannonRootPos = Model::GetBonePosition(hModel_,"CannonRoot");
+		XMVECTOR vtop = XMLoadFloat3( &cannonTopPos);
+		XMVECTOR vroot = XMLoadFloat3( &cannonRootPos);
+		XMVECTOR moveDir = vtop - vroot   ;
 
-		XMVECTOR move;
-		move = speed_ * rotVec;
-		XMVECTOR pos = XMLoadFloat3(&(transform_.position_));
-		pos = pos - move;
-		XMStoreFloat3(&(transform_.position_), pos);
+		moveDir = XMVector3Normalize(moveDir);
+		XMFLOAT3 vmove;
+		XMStoreFloat3(&vmove, moveDir);
+		
 
+		Bullet* pBullet = Instantiate<Bullet>(this->GetParent()->GetParent()); // Bull‚Ì//eŽqŠÖŒW
+		pBullet->SetPosition(cannonTopPos);
+		pBullet->SetMoveDir(vmove);
+		pBullet->SetSpeed(0.3);// 1F‚ ‚½‚è‚É”ò‚Ô `
 	}
-	if (Input::IsKey(DIK_A))
-	{
-		this->transform_.rotate_.y -= 2;
-	}
-	if (Input::IsKey(DIK_D))
-	{
-		this->transform_.rotate_.y += 2;
-	}
-#endif
 
 
 }

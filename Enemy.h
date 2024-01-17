@@ -1,13 +1,16 @@
 #pragma once
 #include"Engine/GameObject.h"
 
-class Ground
-	:public GameObject
+class Enemy
+	: public GameObject
 {
+
 private:
 	int hModel_;
+
 public:
-	Ground(GameObject* parent);
+	Enemy(GameObject* parent);
+	~Enemy();
 
 	//‰Šú‰»
 	void Initialize() override;
@@ -20,7 +23,6 @@ public:
 
 	//ŠJ•ú
 	void Release() override;
-	
-	int GetModelHandle(){ return hModel_; }
+	void OnCollision(GameObject* pTarget);
 
 };

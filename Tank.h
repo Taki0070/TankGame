@@ -26,6 +26,6 @@ public:
 
 
 	void Release() override;
-
+	void OnCollision(GameObject* eTarget);
 };
 

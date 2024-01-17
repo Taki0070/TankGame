@@ -2,7 +2,7 @@
 #include"Engine/Model.h"
 
 Ground::Ground(GameObject* parent)
-	:GameObject(parent),hModel_(-1)
+	:GameObject(parent,"Ground"), hModel_(-1)
 {
 }
 
@@ -18,10 +18,11 @@ void Ground::Update()
 
 void Ground::Draw()
 {
-	Model ::SetTransform(hModel_, transform_);
-	Model ::Draw(hModel_);
+	Model::SetTransform(hModel_, transform_);
+	Model::Draw(hModel_);
 }
 
 void Ground::Release()
 {
 }
+

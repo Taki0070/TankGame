@@ -55,16 +55,16 @@ void Tank::Update()
 	{
 		this->transform_.rotate_.y += 2;
 	}
-	//
+	
 
 	Ground* pGround = (Ground*)FindObject("Ground");
-//	int hGmodel = pGround->GetModelHandle(); //自分のモデルから地面までの距離が分かる
+	int hGmodel = pGround->GetModelHandle(); //自分のモデルから地面までの距離が分かる
 
 	RayCastData data;
 	data.start = transform_.position_;
 	data.start.y = 0;
 	data.dir = XMFLOAT3({ 0,-1,0 });
-	//Model::RayCast(hGmodel, &data);// 距離のデータとか、飛んでいく
+	Model::RayCast(hGmodel, &data);// 距離のデータとか、飛んでいく
 
 	if (data.hit == true)
 	{
@@ -77,11 +77,17 @@ void Tank::Draw()
 {
 	Model::SetTransform(hModel_, transform_);
 	Model::Draw(hModel_);
-
-	
-
 }
 
 void Tank::Release()
 {
+}
+
+void Tank::OnCollision(GameObject* eTarget)
+{
+	if (eTarget->GetObjectName() == "Enemy")
+	{
+		this->KillMe();
+		eTarget->KillMe();
+	}
 }

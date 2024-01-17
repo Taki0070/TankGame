@@ -1,11 +1,12 @@
 #pragma once
 #include"Engine/GameObject.h"
+class Text;
+class Tank;
 
 class PLAY_SCENE
 	:public GameObject
 {
-private:
-	int hModel_;
+	Tank* player;
 public:
 	PLAY_SCENE(GameObject* parent);
 
