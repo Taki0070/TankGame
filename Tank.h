@@ -8,6 +8,7 @@ private:
 	int hModel_;
 	XMVECTOR front_; // 前ベクトル z方向の大きさ
 	float speed_; //0.05,0,05*60 m/s
+	int camState_;
 
 	XMFLOAT3 f;	//何か入ってるとして
 	XMVECTOR v = XMLoadFloat3(&f);

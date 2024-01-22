@@ -7,6 +7,8 @@
 #include"Enemy.h"
 #include"Engine/Camera.h"
 
+int enemyNum{ 20 };
+
 PLAY_SCENE::PLAY_SCENE(GameObject* parent)
 	:GameObject(parent,"PLAY_SCENE")
 {
@@ -17,8 +19,12 @@ PLAY_SCENE::PLAY_SCENE(GameObject* parent)
 void PLAY_SCENE::Initialize()
 {
 	Instantiate<Ground>(this);
-	Instantiate<Tank>(this);
+	//Instantiate<Tank>(this);
+	player = Instantiate<Tank>(this);
+	
+	
 	//Instantiate<TankHead>(this);
+	for(int i=0;i<enemyNum;i++)
 	Instantiate<Enemy>(this);
 
 	
