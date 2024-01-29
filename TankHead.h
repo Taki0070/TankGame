@@ -3,6 +3,7 @@
 class TankHead :
     public GameObject
 {
+	//ok
 public:
 	int hModel_;
 	XMVECTOR front_;

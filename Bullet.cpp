@@ -1,5 +1,7 @@
 #include "Bullet.h"
 #include"Engine/Model.h"
+#include"PLAY_SCENE.h"
+#include"Enemy.h"
 
 Bullet::Bullet(GameObject* parent)
 	:GameObject(parent,"Bullet"),hModel_(-1)
@@ -9,6 +11,11 @@ Bullet::Bullet(GameObject* parent)
 
 Bullet::~Bullet()
 {
+}
+
+void Bullet::Onllision(GameObject* pTarget)
+{
+	
 }
 
 void Bullet::Initialize()
@@ -35,6 +42,7 @@ void Bullet::Update()
 	if (transform_.position_.z <-10) {
 		KillMe();
 	}
+
 }
 
 void Bullet::Draw()

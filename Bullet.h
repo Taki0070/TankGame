@@ -1,5 +1,6 @@
 #pragma once
 #include"Engine/GameObject.h"
+class PlayScene;
 
 class Bullet
 	: public GameObject
@@ -9,10 +10,12 @@ private:
 	int hModel_;
 	float bulletSpeed; // ’eŠÛ‚Ì‘¬‚³
 	XMFLOAT3 moveDir_; // Œü‚«
+	// PlayScene playerScene;
 public:
 	Bullet(GameObject* parent);
 	~Bullet();
 
+	void Onllision(GameObject* pTarget);
 	//‰Šú‰»
 	void Initialize() override;
 

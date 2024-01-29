@@ -7,15 +7,16 @@
 #include"Engine/Camera.h"
 
 enum CAM_TYPE {
-	FIXED_TYPE,
-	TPS_NOROT_TYPE,
-	TPS_TYPE,
-	FPS_TYPE,
-	MAX_TYPE,
+	FIXED_TYPE, //固定
+	TPS_NOROT_TYPE, //三人称視点・回転なし
+	TPS_TYPE,//三人称
+	FPS_TYPE,//一人称
+	MAX_TYPE,//番兵　これやったら次がないよ! (チェック用の値
 };
 
 Tank::Tank(GameObject* parent)
-	:GameObject(parent, "Tank"), hModel_(-1), speed_(0.05), front_({0.0,1.0}),camState_(CAM_TYPE::FIXED_TYPE)
+	:GameObject(parent, "Tank"), hModel_(-1), speed_(0.05),
+	 front_({0.0,1.0}),camState_(CAM_TYPE::FIXED_TYPE)
 {
 
 }
@@ -86,7 +87,7 @@ void Tank::Update()
 
 	if (data.hit == true)
 	{
-		transform_.position_.y = -data.dist;// 0の位置からレイをとばす　（マップは0より下だから
+		transform_.position_.y = -data.dist + 0.5f;// 0の位置からレイをとばす　（マップは0より下だから
 	}
 
 
@@ -108,8 +109,8 @@ void Tank::Update()
 	case CAM_TYPE::TPS_NOROT_TYPE:
 	{
 		XMFLOAT3 camPos = transform_.position_;
-		camPos.y += transform_.position_.y + 20.0f;
-		camPos.z -= transform_.position_.z - 10.0f;
+		camPos.y = transform_.position_.y + 20.0f;
+		camPos.z = transform_.position_.z - 10.0f;
 		Camera::SetPosition(camPos);
 		Camera::SetTarget(transform_.position_);
 		break;
@@ -128,11 +129,12 @@ void Tank::Update()
 	case CAM_TYPE::FPS_TYPE:
 	{
 
-		/*Camera::SetPosition(transform_.position_);
-		XMVECTOR camTarget;
-		XMVECTOR vMove  = XMLoadFloat3(&camTarget,pos + dir *move)
-		XMStoreFloat3(&camTarget, pos + dir * move);
-		Camera::SetTarget(camTarget);*/
+		Camera::SetPosition(transform_.position_);
+		XMFLOAT3 camTarget;
+
+		//XMVECTOR vMove  = XMLoadFloat3(&camTarget,pos + dir *move)
+		XMStoreFloat3(&camTarget, pos + move);
+		Camera::SetTarget(camTarget);
 		break;
 	}
 	default:

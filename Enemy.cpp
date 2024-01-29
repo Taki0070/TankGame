@@ -15,7 +15,7 @@ Enemy::~Enemy()
 
 void Enemy::Initialize()
 {
-	hModel_ = Model::Load("Model\\kinoko.fbx");
+	hModel_ = Model::Load("Model\\enemy2.fbx");
 	assert(hModel_ >= 0);
 	SphereCollider* collision = new SphereCollider({ 0, 0, 0 }, 1.0f);
 	AddCollider(collision);
@@ -27,7 +27,7 @@ void Enemy::Initialize()
 	transform_.position_.x = 25.0 * (x - 1.0);
 	float z = (float)rand() / RAND_MAX;
 	z = 2.0 * z;
-	transform_.position_.z = 25.0 * (z * 1.0);
+	transform_.position_.z = 10.0 * (z * 1.0); // Œ³25.0
 	transform_.position_.y = 0;
 
 	Ground* pGround = (Ground*)FindObject("Ground");
@@ -65,5 +65,7 @@ void Enemy::OnCollision(GameObject* pTarget)
 	if (pTarget->GetObjectName() == "Bullet") {
 		this->KillMe();
 		pTarget->KillMe();
+
 	}
+	this->KillMe();
 }

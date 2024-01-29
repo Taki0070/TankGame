@@ -15,7 +15,7 @@ TankHead::~TankHead()
 
 void TankHead::Initialize()
 {
-	hModel_ = Model::Load("Model\\tankhed2.fbx");
+	hModel_ = Model::Load("Model\\tankhead2.fbx");
 	assert(hModel_>= 0);
 }
 

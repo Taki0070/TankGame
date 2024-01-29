@@ -151,6 +151,7 @@
     <ClCompile Include="Engine\Texture.cpp" />
     <ClCompile Include="Engine\Transform.cpp" />
     <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="HUD.cpp" />
     <ClCompile Include="PLAY_SCENE.cpp" />
     <ClCompile Include="Tank.cpp" />
     <ClCompile Include="TankHead.cpp" />
@@ -184,11 +185,13 @@
     <ClInclude Include="Engine\Texture.h" />
     <ClInclude Include="Engine\Transform.h" />
     <ClInclude Include="Ground.h" />
+    <ClInclude Include="HUD.h" />
     <ClInclude Include="PLAY_SCENE.h" />
     <ClInclude Include="Tank.h" />
     <ClInclude Include="TankHead.h" />
     <ClInclude Include="TestScene.h" />
     <ClInclude Include="TITLE_SCENE.h" />
+    <ClInclude Include="UI.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\BillBoard.hlsl">
