@@ -11,7 +11,7 @@ TITLE_SCENE::TITLE_SCENE(GameObject* parent)
 
 void TITLE_SCENE::Initialize()
 {
-	hPict_ = Image::Load("Image\\tf2.png");
+	hPict_ = Image::Load("Image\\table.png");
 	assert(hPict_ >= 0);
 }
 
