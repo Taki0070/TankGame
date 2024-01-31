@@ -14,7 +14,7 @@ void TITLE_SCENE::Initialize()
 	hPict_ = Image::Load("Image\\table.png");
 	assert(hPict_ >= 0);
 }
-
+//ok
 void TITLE_SCENE::Update()
 {
 	if (Input::IsKey(DIK_SPACE))
